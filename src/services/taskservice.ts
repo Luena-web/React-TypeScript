@@ -7,5 +7,12 @@ export async function getTasks(): Promise<Task[]>{
   // 2. Retourner les données reçues
   // 2. utilisation de wait et async pour attendre les réponses du serveur
   return result.data;
+  
 } 
 
+
+export async function createTask(
+  task: Omit<Task, "id">
+): Promise<Task> {
+ 
+}
