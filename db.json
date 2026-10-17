@@ -1,5 +1,26 @@
 {
   "tasks": [
-   
-  ]
+    {
+      "id": "1",
+      "title": "Apprendre React",
+      "description": "Comprendre useState et useEffect",
+      "isCompleted": false,
+      "createdAt": "2026-10-17T08:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Apprendre TypeScript",
+      "description": "Comprendre les types",
+      "isCompleted": true,
+      "createdAt": "2026-10-17T09:00:00.000Z"
+    },
+    {
+      "title": "Apprendre la création dun formulaire",
+      "description": "k,jnhbg",
+      "isCompleted": false,
+      "createdAt": "2026-10-17T10:36:51.407Z",
+      "id": "TcWJyu-7hBY"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

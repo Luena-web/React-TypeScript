@@ -1,12 +1,32 @@
 
 import { useState, useEffect } from "react";
 import type { Task } from "./types/task";
-import { getTasks } from "./services/taskservice";
+
+import TaskForm from "./components/TaskForm";
+import { getTasks, createTask,updateTask } from "./services/taskservice";
 
 function App() {
   // État de la liste des tâches
   const [tasks, setTasks] = useState<Task[]>([]);
+  async function handleAddTask(task: Omit<Task, "id">) {
+  const newTask = await createTask(task);
 
+  setTasks((currentTasks) => [...currentTasks, newTask]);
+}
+
+async function handleToggleTask(task: Task) {
+  const updatedTask = await updateTask(task.id, {
+    isCompleted: !task.isCompleted,
+  });
+
+  setTasks((currentTasks) =>
+    currentTasks.map((currentTask) =>
+      currentTask.id === updatedTask.id
+        ? updatedTask
+        : currentTask
+    )
+  );
+}
   // État du chargement
   const [isLoading, setIsLoading] = useState(true);
 
@@ -35,13 +55,13 @@ function App() {
     <div>
       <h1>Mes tâches</h1>
 
-      /* Afficher le chargement */
+      {/* Afficher le chargement */}
       {isLoading && <p>Chargement des tâches...</p>}
 
-      /* Afficher une erreur si nécessaire */
+      {/* Afficher une erreur si nécessaire */}
       {error && <p role="alert">{error}</p>}
 
-      /* Afficher la liste uniquement si le chargement a réussi */
+      {/* Afficher la liste uniquement si le chargement a réussi */}
       {!isLoading && !error && (
         tasks.length === 0 ? (
           <p>Aucune tâche pour le moment.</p>
@@ -64,6 +84,7 @@ function App() {
           </ul>
         )
       )}
+      <TaskForm onAdd={handleAddTask} />
     </div>
   );
 }
