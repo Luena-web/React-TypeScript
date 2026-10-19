@@ -1,15 +1,8 @@
 {
   "tasks": [
     {
-      "title": "Apprendre React Js",
-      "description": "",
-      "isCompleted": false,
-      "createdAt": "2026-10-18T19:15:38.308Z",
-      "id": 2
-    },
-    {
       "title": "Usestate et useEffect",
-      "description": "lkjiuhgytr(sez",
+      "description": "useSate pour la mémoire interne et useEffect pour les données externes",
       "isCompleted": false,
       "createdAt": "2026-10-18T23:16:16.819Z",
       "id": 3
@@ -20,6 +13,27 @@
       "isCompleted": false,
       "createdAt": "2026-10-18T23:29:32.331Z",
       "id": 4
+    },
+    {
+      "title": "Documenter mon API",
+      "description": "Il s'agit d'une Api",
+      "isCompleted": false,
+      "createdAt": "2026-10-19T10:01:48.794Z",
+      "id": 5
+    },
+    {
+      "title": "Lire",
+      "description": "jhgf",
+      "isCompleted": false,
+      "createdAt": "2026-10-19T16:11:01.502Z",
+      "id": 6
+    },
+    {
+      "title": "Courir",
+      "description": "",
+      "isCompleted": false,
+      "createdAt": "2026-10-19T16:11:56.118Z",
+      "id": 7
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

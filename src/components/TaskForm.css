@@ -18,6 +18,7 @@
   color: #172554;
   font-size: 24px;
   font-weight: 700;
+  
 }
 
 
@@ -81,16 +82,17 @@
   padding: 13px 18px;
   border: none;
   border-radius: 9px;
-  background-color: #2563eb;
+  background-color: #046545;
   color: #ffffff;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+    margin-top: 6px;
   transition: background-color 0.2s, transform 0.2s;
 }
 
 .task-form button:hover:not(:disabled) {
-  background-color: #1d4ed8;
+  background-color: green;
   transform: translateY(-1px);
 }
 
@@ -109,4 +111,51 @@
   .task-form h2 {
     font-size: 21px;
   }
+  
+  
+/* Conteneur des boutons */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Bouton Annuler */
+.cancel-button {
+  padding: 12px 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: white;
+  color: #475569;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancel-button:hover {
+  background-color: #f1f5f9;
+}
+
+
+.form-actions button[type="submit"] {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-actions button[type="submit"]:hover {
+  background-color: #1d4ed8;
+}
+
+.form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 }

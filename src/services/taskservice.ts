@@ -6,8 +6,9 @@ export async function getTasks(): Promise<Task[]> {
 
   return result.data;
 }
-
-
+//L'ID est générer par Json Server
+//construire les propiétes de Task prédéfinis sauf l'ID  Omit<Task, "id">
+//Promise<Task> Précise le type de resultat entendu 
 export async function createTask(
   task: Omit<Task, "id">
 ): Promise<Task> {
@@ -18,7 +19,7 @@ export async function createTask(
 
 export async function updateTask(
   id: number,
-  updates: Partial<Omit<Task, "id">>
+  updates: Partial<Omit<Task, "id">> // Modifier partiellement  tous les champs à l'exception de l'ID
 ): Promise<Task> {
   const result = await api.patch<Task>(
     "/tasks/" + id   ,
