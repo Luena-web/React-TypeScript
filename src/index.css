@@ -109,3 +109,169 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.task-list {
+  display: grid;
+  gap: 16px;
+  padding: 0;
+  margin: 24px 0;
+  list-style: none;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.task-content h3 {
+  margin: 0 0 8px;
+  color: #1e293b;
+}
+
+.task-content p {
+  margin: 0 0 10px;
+  color: #64748b;
+}
+
+.task-status {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.task-item.completed .task-content h3 {
+  text-decoration: line-through;
+  color: #64748b;
+}
+
+.task-actions button  {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #027914;
+  color: white;
+  cursor: pointer;
+}
+
+.task-actions button.delete-button{
+  background: #eb2546;
+}
+
+.task-actions button:hover {
+  background: #068758;
+}
+.task-actions button.delete-button:hover{
+background: #9a0b15;
+}
+@media (max-width: 600px) {
+  .task-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .task-actions,
+  .task-actions button {
+    width: 100%;
+  }
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+.page-header p {
+  color: #64748b;
+}
+
+.new-task-button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgb(15 23 42 / 55%);
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 20%);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.close-button {
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    align-items: flex-start;
+  }
+
+  .new-task-button {
+    white-space: nowrap;
+  }
+  .delete-button {
+  padding: 10px 14px;
+  border: 1px solid #dc2626;
+  border-radius: 8px;
+  background: white;
+  color: #dc2626;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background: #dc2626;
+  color: white;
+}
+
+.task-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+}

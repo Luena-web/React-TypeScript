@@ -18,10 +18,10 @@ export async function createTask(
 
 export async function updateTask(
   id: number,
-  updates: Partial<Task>
+  updates: Partial<Omit<Task, "id">>
 ): Promise<Task> {
   const result = await api.patch<Task>(
-    '/tasks/${id}',
+    "/tasks/" + id   ,
     updates
   );
 
@@ -29,5 +29,5 @@ export async function updateTask(
 }
 
 export async function deleteTask(id: number): Promise<void> {
-  await api.delete(`/tasks/${id}`);
+  await api.delete("/tasks/" + id   );
 }

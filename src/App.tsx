@@ -1,13 +1,14 @@
 
 import { useState, useEffect } from "react";
 import type { Task } from "./types/task";
-
+import TaskItem from "./components/TaskItems";
 import TaskForm from "./components/TaskForm";
-import { getTasks, createTask,updateTask } from "./services/taskservice";
+import { getTasks, createTask,updateTask,deleteTask } from "./services/taskservice";
 
 function App() {
   // État de la liste des tâches
   const [tasks, setTasks] = useState<Task[]>([]);
+
   async function handleAddTask(task: Omit<Task, "id">) {
   const newTask = await createTask(task);
 
@@ -18,6 +19,7 @@ async function handleToggleTask(task: Task) {
   const updatedTask = await updateTask(task.id, {
     isCompleted: !task.isCompleted,
   });
+  
 
   setTasks((currentTasks) =>
     currentTasks.map((currentTask) =>
@@ -51,9 +53,46 @@ async function handleToggleTask(task: Task) {
     loadTasks();
   }, []);
 
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  async function handleDeleteTask(task: Task) {
+  const confirmed = window.confirm(
+    `Veux-tu vraiment supprimer la tâche "${task.title}" ?`
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+    await deleteTask(task.id);
+
+    setTasks((currentTasks) =>
+      currentTasks.filter(
+        (currentTask) => currentTask.id !== task.id
+      )
+    );
+  } catch {
+    window.alert(
+      "Impossible de supprimer la tâche. Réessaie."
+    );
+  }
+}
+
   return (
     <div>
-      <h1>Mes tâches</h1>
+     <header className="page-header">
+  <div>
+    <h1>Mes tâches</h1>
+  </div>
+
+  <button
+    type="button"
+    className="new-task-button"
+    onClick={() => setIsFormOpen(true)}
+  >
+    + Nouveau
+  </button>
+</header>
 
       {/* Afficher le chargement */}
       {isLoading && <p>Chargement des tâches...</p>}
@@ -66,25 +105,52 @@ async function handleToggleTask(task: Task) {
         tasks.length === 0 ? (
           <p>Aucune tâche pour le moment.</p>
         ) : (
-          <ul>
-            {tasks.map((task) => (
-              <li key={task.id}>
-                <h3>{task.title}</h3>
-
-                <p>
-                  {task.description || "Aucune description"}
-                </p>
-
-                <p>
-                  Statut :{" "}
-                  {task.isCompleted ? "Terminée" : "À faire"}
-                </p>
-              </li>
-            ))}
-          </ul>
+          <ul className="task-list">
+  {tasks.map((task) => (
+    <TaskItem
+      key={task.id}
+      task={task}
+      onToggle={handleToggleTask}
+      onDelete={handleDeleteTask}
+    />
+  ))}
+</ul>
         )
       )}
-      <TaskForm onAdd={handleAddTask} />
+    
+{isFormOpen && (
+  <div className="modal-overlay">
+    <div
+      className="modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div className="modal-header">
+        <h2 id="modal-title">Nouvelle tâche</h2>
+
+        <button
+          type="button"
+          className="close-button"
+          onClick={() => setIsFormOpen(false)}
+          aria-label="Fermer le formulaire"
+        >
+          ×
+        </button>
+      </div>
+
+      <TaskForm
+        onAdd={async (task) => {
+          await handleAddTask(task);
+          setIsFormOpen(false);
+        }}
+      />
+    </div>
+  </div>
+)} 
+     
+
+
     </div>
   );
 }

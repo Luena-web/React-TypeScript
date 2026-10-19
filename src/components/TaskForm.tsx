@@ -1,10 +1,15 @@
 
 import { useState } from "react";
 import type { FormEvent } from "react";
+import "./TaskForm.css";
 import type { Task } from "../types/task";
 
 type TaskFormProps = {
-  onAdd: (task: Omit<Task, "id">) => Promise<void>;
+  onAdd: (task: Omit<Task, "id">,
+    initialTask?: Task,
+  onUpdate?: (task: Task) => Promise<void>,
+  onCancel?: () => void
+  ) => Promise<void>;
 };
 
 function TaskForm({ onAdd }: TaskFormProps) {
@@ -45,38 +50,44 @@ function TaskForm({ onAdd }: TaskFormProps) {
     }
   }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="title">Titre *</label>
-        <input
-          id="title"
-          type="text"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          placeholder="Ex. : Apprendre React"
-          required
-        />
-      </div>
+ return (
+  <form className="task-form" onSubmit={handleSubmit}>
+    <h2>Ajouter une tâche</h2>
 
-      <div>
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-          placeholder="Décris ta tâche (facultatif)"
-          rows={3}
-        />
-      </div>
+    <div className="form-group">
+      <label htmlFor="title">Titre</label>
+      <input
+        id="title"
+        type="text"
+        value={title}
+        onChange={(event) => setTitle(event.target.value)}
+        placeholder="Ex. : Apprendre React"
+        required
+      />
+    </div>
 
-      {error && <p role="alert">{error}</p>}
+    <div className="form-group">
+      <label htmlFor="description">Description</label>
+      <textarea
+        id="description"
+        value={description}
+        onChange={(event) => setDescription(event.target.value)}
+        placeholder="Décris ta tâche (facultatif)"
+        rows={3}
+      />
+    </div>
 
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Ajout en cours..." : "Ajouter une tâche"}
-      </button>
-    </form>
-  );
+    {error && (
+      <p className="form-error" role="alert">
+        {error}
+      </p>
+    )}
+
+    <button type="submit" disabled={isSubmitting}>
+      {isSubmitting ? "Ajout en cours..." : "Ajouter une tâche"}
+    </button>
+  </form>
+);
 }
 
 export default TaskForm;
